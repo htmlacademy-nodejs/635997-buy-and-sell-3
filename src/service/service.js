@@ -16,6 +16,7 @@ if (userArguments.length === 0 || !Cli[userCommand]) {
   process.exit(ExitCode.success);
 }
 
+// eslint-disable-next-line radix
 if (Number.parseInt(userArguments[1]) >= 1000) {
   console.error(chalk.red(`Не больше 1000 публикаций`));
   process.exit(ExitCode.error);
