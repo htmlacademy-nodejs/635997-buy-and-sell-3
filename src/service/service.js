@@ -1,5 +1,6 @@
 'use strict';
 
+const chalk = require(`chalk`);
 const {Cli} = require(`./cli`);
 const {
   DEFAULT_COMMAND,
@@ -15,5 +16,10 @@ if (userArguments.length === 0 || !Cli[userCommand]) {
   process.exit(ExitCode.success);
 }
 
-Cli[userCommand].run(userArguments.slice(1));
+// eslint-disable-next-line radix
+if (Number.parseInt(userArguments[1]) >= 1000) {
+  console.error(chalk.red(`Не больше 1000 публикаций`));
+  process.exit(ExitCode.error);
+}
 
+Cli[userCommand].run(userArguments.slice(1));
