@@ -9,6 +9,7 @@ const {
 } = require(`../../utils`);
 
 const DEFAULT_COUNT = 1;
+const MAX_OFFER_COUNT = 10000;
 const MOCKS_FILE = `mocks.json`;
 const TITLES_PATH = `./data/titles.txt`;
 const CATEGORIES_PATH = `./data/categories.txt`;
@@ -58,6 +59,10 @@ module.exports = {
   async run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+
+    if (countOffer >= MAX_OFFER_COUNT) {
+      console.error(chalk.red(`Не больше ${MAX_OFFER_COUNT} публикаций`));
+    }
 
     const titles = await readFile(TITLES_PATH);
     const categories = await readFile(CATEGORIES_PATH);
